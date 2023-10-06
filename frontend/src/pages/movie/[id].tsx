@@ -42,8 +42,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = session?.user?.token ?? "";
   const baseURL = process.env.BACKEND_URL || "http://localhost:5000";
 
-  try {
-    if (id) {
+  if (id) {
+    try {
       await queryClient.fetchQuery([+id], async () => {
         const response = await axios.get(baseURL + `/api/movie/${id}`, {
           headers: {
@@ -53,9 +53,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         });
         return response?.data;
       });
+    } catch (error) {
+      console.log("error", error);
     }
-  } catch (error) {
-    console.log("error", error);
   }
 
   return { props: { dehydratedState: dehydrate(queryClient), id, session } };
