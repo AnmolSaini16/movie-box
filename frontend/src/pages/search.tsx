@@ -2,18 +2,28 @@ import { getSearchResults } from "@/api/movieApi";
 import { Movie } from "@/interfaces/movieInterface";
 import { uiConfigs } from "@/styleConfig/uiConfig";
 import { Box, Grid, Skeleton, Typography } from "@mui/material";
-import { useRouter } from "next/router";
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import MovieItem from "@/components/movie/MovieItem";
 import Head from "next/head";
 import { MovieItemType } from "@/constants/movieContants";
+import { debounce } from "lodash";
+import { AppContext, AppContextType } from "@/context/appContext";
 
 const SearchPage = () => {
-  const router = useRouter();
-  const { q } = router.query;
-  const { data, isLoading } = getSearchResults<Movie>(q as string, 1);
+  const { searchText } = useContext(AppContext) as AppContextType;
+  const [searchQuery, setSeachQuery] = useState<string>(searchText);
+  const { data, isLoading } = getSearchResults<Movie>(searchQuery, 1);
   const searchResults = data?.data;
+
+  const debounceSearch = useCallback(
+    debounce((query: string) => setSeachQuery(query), 500),
+    []
+  );
+
+  useEffect(() => {
+    debounceSearch(searchText);
+  }, [searchText]);
 
   return (
     <>

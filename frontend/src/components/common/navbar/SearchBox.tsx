@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./StyledComponents";
@@ -12,21 +12,20 @@ export const SearchBox = () => {
     AppContext
   ) as AppContextType;
 
-  const debounceSearch = useCallback(
-    debounce(
-      (query: string) =>
-        router.push({ pathname: "/search", query: { q: query } }, undefined, {
-          shallow: true,
-        }),
-      500
-    ),
+  const debounceRouteSwitch = useCallback(
+    debounce(() => router.push("/search"), 500),
     []
   );
 
   const handleSearchResult = (value: string) => {
-    debounceSearch(value);
     setSearchText(value);
   };
+
+  useEffect(() => {
+    if (searchText.length && router.asPath !== "/search") {
+      debounceRouteSwitch();
+    }
+  }, [searchText]);
 
   return (
     <Search>
