@@ -143,8 +143,9 @@ export default function MovieItemComponent({
               divider={<Divider orientation="vertical" flexItem />}
             >
               <Typography fontSize={"0.8rem"}>
-                {movie?.release_date?.split("-")[0]}
+                {movie?.release_date?.split("-")[0] ?? "-"}
               </Typography>
+
               <HdIcon />
 
               {type === "favorite" && (
