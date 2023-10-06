@@ -20,7 +20,9 @@ export const authOptions: NextAuthOptions = {
           password: credentials?.password,
         };
 
-        const res = await fetch("http://localhost:5000/api/auth/signin", {
+        const baseURL = process.env.BACKEND_URL || "http://localhost:5000";
+
+        const res = await fetch(`${baseURL}/api/auth/signin`, {
           method: "POST",
           body: JSON.stringify(payload),
           headers: {
@@ -60,6 +62,7 @@ export const authOptions: NextAuthOptions = {
         };
 
         const baseURL = process.env.BACKEND_URL || "http://localhost:5000";
+
         const res = await fetch(`${baseURL}/api/auth/signup`, {
           method: "POST",
           body: JSON.stringify(payload),
