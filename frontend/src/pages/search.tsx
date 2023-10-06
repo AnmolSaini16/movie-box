@@ -7,6 +7,7 @@ import React from "react";
 
 import MovieItem from "@/components/movie/MovieItem";
 import Head from "next/head";
+import { MovieItemType } from "@/constants/movieContants";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const SearchPage = () => {
           ) : (
             searchResults?.results?.map((movie) => (
               <Grid item key={movie.id}>
-                <MovieItem movie={movie} />
+                <MovieItem movie={movie} type={MovieItemType.MovieRowItem} />
               </Grid>
             ))
           )}

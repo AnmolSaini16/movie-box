@@ -18,3 +18,8 @@ export enum MovieRowTitle {
   TopRatedMovies = "Top Rated Movies",
   UpComingMovies = "Up Coming Movies",
 }
+
+export enum MovieItemType {
+  MovieRowItem = "MovieRowItem",
+  MovieRowFavoriteItem = "MovieRowFavoriteItem",
+}

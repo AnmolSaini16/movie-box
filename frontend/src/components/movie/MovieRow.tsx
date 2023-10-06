@@ -3,7 +3,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import React from "react";
 import { SwiperSlide } from "swiper/react";
 
-import { MovieRowTitle, MovieType } from "@/constants/movieContants";
+import {
+  MovieItemType,
+  MovieRowTitle,
+  MovieType,
+} from "@/constants/movieContants";
 import { getMovieWithType } from "@/api/movieApi";
 import MovieItem from "./MovieItem";
 import { VerticalSwiper } from "../common/VerticalSwiper";
@@ -46,7 +50,10 @@ export const MovieRow = ({
                 ))
               : movieData?.results?.map((movieItem) => (
                   <SwiperSlide key={movieItem.id}>
-                    <MovieItem movie={movieItem} />
+                    <MovieItem
+                      movie={movieItem}
+                      type={MovieItemType.MovieRowItem}
+                    />
                   </SwiperSlide>
                 ))}
           </>

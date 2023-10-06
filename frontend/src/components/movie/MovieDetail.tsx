@@ -229,10 +229,10 @@ export const MovieDetail = ({
                       fontWeight="700"
                       sx={{ ...uiConfigs.style.typoLines(2, "left") }}
                     >
-                      {movie?.release_date &&
-                        `${movie?.title || movie?.original_title} (${
-                          movie?.release_date?.split("-")[0]
-                        })`}
+                      {`${movie?.title || movie?.original_title} ${
+                        movie?.release_date &&
+                        `(${movie?.release_date?.split("-")[0]})`
+                      }`}
                     </Typography>
 
                     <Typography fontStyle="italic">{movie?.tagline}</Typography>
@@ -268,7 +268,7 @@ export const MovieDetail = ({
                     variant="body1"
                     sx={{ ...uiConfigs.style.typoLines(10) }}
                   >
-                    {movie?.overview}
+                    {movie?.overview ?? ""}
                   </Typography>
 
                   <Stack direction="row" spacing={3}>
@@ -315,7 +315,6 @@ export const MovieDetail = ({
         </Box>
 
         {/* Movie Videos */}
-
         {!!movie?.videos?.results?.length && (
           <Box ref={videoRef}>
             <MovieVideos videos={movie?.videos.results.slice(0, 5)} />

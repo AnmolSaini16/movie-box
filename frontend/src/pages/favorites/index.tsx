@@ -11,6 +11,7 @@ import { uiConfigs } from "@/styleConfig/uiConfig";
 import MovieItem from "@/components/movie/MovieItem";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import { MovieItemType as MovieItemTypeContant } from "@/constants/movieContants";
 
 const movieTypeNotUsedValues = {
   adult: false,
@@ -63,7 +64,10 @@ const FavoritesPage = () => {
                 };
                 return (
                   <Grid item key={favorite.id}>
-                    <MovieItem movie={movieType} type="favorite" />
+                    <MovieItem
+                      movie={movieType}
+                      type={MovieItemTypeContant.MovieRowFavoriteItem}
+                    />
                   </Grid>
                 );
               })}

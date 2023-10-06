@@ -20,15 +20,15 @@ import { LoadingImage } from "../common/LoadingImage";
 import { removeFavorite } from "@/api/userApi";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { MovieType } from "@/constants/movieContants";
+import { MovieItemType, MovieType } from "@/constants/movieContants";
 import { useSession } from "next-auth/react";
 
 export default function MovieItemComponent({
   movie,
-  type = undefined,
+  type = MovieItemType.MovieRowItem,
 }: {
   movie: MovieItem;
-  type?: string;
+  type: MovieItemType;
 }) {
   const { data: session } = useSession();
   const { enqueueSnackbar } = useSnackbar();
@@ -142,13 +142,15 @@ export default function MovieItemComponent({
               spacing={0.5}
               divider={<Divider orientation="vertical" flexItem />}
             >
-              <Typography fontSize={"0.8rem"}>
-                {movie?.release_date && movie?.release_date?.split("-")[0]}
-              </Typography>
+              {movie?.release_date && (
+                <Typography fontSize={"0.8rem"}>
+                  {movie?.release_date?.split("-")[0]}
+                </Typography>
+              )}
 
               <HdIcon />
 
-              {type === "favorite" && (
+              {type === MovieItemType.MovieRowFavoriteItem && (
                 <Box>
                   <Tooltip title={loading ? "" : "Remove from favorite"}>
                     <IconButton

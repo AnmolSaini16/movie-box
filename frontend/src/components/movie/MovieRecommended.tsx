@@ -4,6 +4,7 @@ import { SwiperSlide } from "swiper/react";
 import { VerticalSwiper } from "../common/VerticalSwiper";
 import MovieItem from "./MovieItem";
 import { WrapperContainer } from "../common/WrapperContainer";
+import { MovieItemType as MovieItemTypeConstant } from "@/constants/movieContants";
 
 export const MovieRecommended = ({
   recommendations,
@@ -16,7 +17,10 @@ export const MovieRecommended = ({
         <>
           {recommendations?.map((recommendation) => (
             <SwiperSlide key={recommendation.id}>
-              <MovieItem movie={recommendation} />
+              <MovieItem
+                movie={recommendation}
+                type={MovieItemTypeConstant.MovieRowItem}
+              />
             </SwiperSlide>
           ))}
         </>
