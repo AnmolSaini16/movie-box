@@ -59,7 +59,8 @@ export const authOptions: NextAuthOptions = {
           name: credentials?.name,
         };
 
-        const res = await fetch("http://localhost:5000/api/auth/signup", {
+        const baseURL = process.env.BACKEND_URL || "http://localhost:5000";
+        const res = await fetch(`${baseURL}/api/auth/signup`, {
           method: "POST",
           body: JSON.stringify(payload),
           headers: {

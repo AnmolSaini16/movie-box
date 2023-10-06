@@ -2,7 +2,7 @@ import { MovieType } from "@/constants/movieContants";
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
-const baseURL = "http://localhost:5000";
+const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
 const AxiosOptions = {
   baseURL,

@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { id } = context.query;
   const token = session?.user?.token ?? "";
-  const baseURL = "http://localhost:5000";
+  const baseURL = process.env.BACKEND_URL || "http://localhost:5000";
 
   try {
     if (id) {
