@@ -229,9 +229,10 @@ export const MovieDetail = ({
                       fontWeight="700"
                       sx={{ ...uiConfigs.style.typoLines(2, "left") }}
                     >
-                      {`${movie?.title || movie?.original_title} (${
-                        movie?.release_date?.split("-")[0]
-                      })`}
+                      {movie?.release_date &&
+                        `${movie?.title || movie?.original_title} (${
+                          movie?.release_date?.split("-")[0]
+                        })`}
                     </Typography>
 
                     <Typography fontStyle="italic">{movie?.tagline}</Typography>
