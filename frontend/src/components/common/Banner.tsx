@@ -107,7 +107,7 @@ export const Banner = ({ movieType }: Props) => {
                     </Box>
 
                     <Stack direction="row" spacing={1}>
-                      {[...movieItem.genre_ids].splice(0, 2).map((genreId) => {
+                      {movieItem.genre_ids.slice(0, 2).map((genreId) => {
                         return (
                           <Chip
                             color="primary"
@@ -143,15 +143,18 @@ export const Banner = ({ movieType }: Props) => {
                       {movieItem.overview}
                     </Typography>
 
-                    <Link href={`/movie/${movieItem.id}`}>
-                      <Button
-                        variant="outlined"
-                        sx={{ width: 150, height: 40 }}
-                        color="secondary"
-                      >
-                        Watch Now
-                      </Button>
-                    </Link>
+                    {/* Watch Now Button */}
+                    <Box>
+                      <Link href={`/movie/${movieItem.id}`} passHref>
+                        <Button
+                          variant="outlined"
+                          sx={{ width: 150, height: 40 }}
+                          color="secondary"
+                        >
+                          Watch Now
+                        </Button>
+                      </Link>
+                    </Box>
                   </Stack>
                 </Box>
               </Box>
