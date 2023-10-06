@@ -245,7 +245,7 @@ export const MovieDetail = ({
                     flexWrap="wrap"
                   >
                     {/* rate */}
-                    {movie?.vote_average && (
+                    {movie?.vote_average > 0 && (
                       <CircularRateComponent value={movie?.vote_average!} />
                     )}
 
