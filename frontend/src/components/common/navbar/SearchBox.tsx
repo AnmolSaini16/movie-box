@@ -13,7 +13,7 @@ export const SearchBox = () => {
   ) as AppContextType;
 
   const debounceRouteSwitch = useCallback(
-    debounce(() => router.push("/search"), 500),
+    debounce(() => router.push("/search", undefined, { shallow: true }), 500),
     []
   );
 
