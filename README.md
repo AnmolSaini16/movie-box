@@ -11,7 +11,7 @@
 * Prisma
 * JWT
 
-![image](https://github.com/AnmolSaini16/movie-box/assets/72123368/63c6aab9-d21f-40e5-a07d-75e4815889fe)
+![image](https://github.com/AnmolSaini16/movie-box/assets/72123368/62c58982-4be0-47fd-9531-0819e05fa921)
 
 ![image](https://github.com/AnmolSaini16/movie-box/assets/72123368/4fa96efd-55b5-4d46-aca7-49d5812026da)
 
