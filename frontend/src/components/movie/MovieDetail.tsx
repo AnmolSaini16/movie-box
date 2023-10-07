@@ -235,7 +235,11 @@ export const MovieDetail = ({
                       }`}
                     </Typography>
 
-                    <Typography fontStyle="italic">{movie?.tagline}</Typography>
+                    {movie?.tagline && (
+                      <Typography fontStyle="italic">
+                        {movie.tagline}
+                      </Typography>
+                    )}
                   </Box>
 
                   {/* rate and genres */}
