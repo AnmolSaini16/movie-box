@@ -1,5 +1,11 @@
-import { IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -38,7 +44,15 @@ export const UserMenu = ({ session }: { session: Session | null }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <PersonOutlinedIcon fontSize="inherit" />
+        <Avatar
+          sx={{
+            width: 34,
+            height: 34,
+            backgroundColor: (theme) => theme.palette.primary.main,
+          }}
+        >
+          {session?.user?.name[0].toUpperCase()}
+        </Avatar>
       </IconButton>
 
       <Menu
@@ -66,6 +80,8 @@ export const UserMenu = ({ session }: { session: Session | null }) => {
           {session?.user?.name}
         </MenuItem>
 
+        <Divider />
+
         <Link
           href="/favorites"
           style={{ textDecoration: "none", color: "inherit" }}
@@ -74,7 +90,7 @@ export const UserMenu = ({ session }: { session: Session | null }) => {
             <ListItemIcon>
               <FavoriteBorderIcon fontSize="small" />
             </ListItemIcon>
-            Favorites
+            My Favorites
           </MenuItem>
         </Link>
 

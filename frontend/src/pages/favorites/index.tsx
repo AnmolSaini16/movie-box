@@ -41,36 +41,44 @@ const FavoritesPage = () => {
           <Typography sx={{ fontSize: "18px" }}>Your Favorites</Typography>
         </Box>
         <Grid container spacing={1}>
-          {isLoading
-            ? new Array(6).fill("").map((_x, i) => (
-                <Grid item key={i}>
-                  <Skeleton
-                    variant="rectangular"
-                    animation="wave"
-                    width={225}
-                    height={335}
+          {isLoading ? (
+            new Array(6).fill("").map((_x, i) => (
+              <Grid item key={i}>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={225}
+                  height={335}
+                />
+              </Grid>
+            ))
+          ) : !favoritesData?.length ? (
+            <Box textAlign="center" mx="auto" mt={10}>
+              <Typography color="text.secondary">
+                You haven't added any titles to your favorites yet.
+              </Typography>
+            </Box>
+          ) : (
+            favoritesData?.map((favorite) => {
+              const movieType: MovieItemType = {
+                id: favorite.movieId,
+                title: favorite.movieTitle,
+                poster_path: favorite.moviePosterURL,
+                vote_average: favorite.movieRating,
+                release_date: favorite.movieReleaseData,
+                genre_ids: favorite.movieGenre,
+                ...movieTypeNotUsedValues,
+              };
+              return (
+                <Grid item key={favorite.id}>
+                  <MovieItem
+                    movie={movieType}
+                    type={MovieItemTypeContant.MovieRowFavoriteItem}
                   />
                 </Grid>
-              ))
-            : favoritesData?.map((favorite) => {
-                const movieType: MovieItemType = {
-                  id: favorite.movieId,
-                  title: favorite.movieTitle,
-                  poster_path: favorite.moviePosterURL,
-                  vote_average: favorite.movieRating,
-                  release_date: favorite.movieReleaseData,
-                  genre_ids: favorite.movieGenre,
-                  ...movieTypeNotUsedValues,
-                };
-                return (
-                  <Grid item key={favorite.id}>
-                    <MovieItem
-                      movie={movieType}
-                      type={MovieItemTypeContant.MovieRowFavoriteItem}
-                    />
-                  </Grid>
-                );
-              })}
+              );
+            })
+          )}
         </Grid>
       </Box>
     </>

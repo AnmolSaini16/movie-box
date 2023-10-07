@@ -47,8 +47,8 @@ const SearchPage = () => {
               </Grid>
             ))
           ) : !searchResults?.results.length ? (
-            <Box textAlign="center" width="100%" mt={4}>
-              <Typography>No Results Found</Typography>
+            <Box textAlign="center" mx="auto" mt={10}>
+              <Typography color="text.secondary">No Results Found.</Typography>
             </Box>
           ) : (
             searchResults?.results?.map((movie) => (
