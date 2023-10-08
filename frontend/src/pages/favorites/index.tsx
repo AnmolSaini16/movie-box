@@ -12,6 +12,7 @@ import MovieItem from "@/components/movie/MovieItem";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { MovieItemType as MovieItemTypeContant } from "@/constants/movieContants";
+import { GridDataLoading } from "@/components/common/GridDataLoading";
 
 const movieTypeNotUsedValues = {
   adult: false,
@@ -42,16 +43,7 @@ const FavoritesPage = () => {
         </Box>
         <Grid container spacing={1}>
           {isLoading ? (
-            new Array(6).fill("").map((_x, i) => (
-              <Grid item key={i}>
-                <Skeleton
-                  variant="rectangular"
-                  animation="wave"
-                  width={225}
-                  height={335}
-                />
-              </Grid>
-            ))
+            <GridDataLoading />
           ) : !favoritesData?.length ? (
             <Box textAlign="center" mx="auto" mt={10}>
               <Typography color="text.secondary">

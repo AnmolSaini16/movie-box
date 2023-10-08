@@ -9,6 +9,7 @@ import Head from "next/head";
 import { MovieItemType } from "@/constants/movieContants";
 import { debounce } from "lodash";
 import { AppContext, AppContextType } from "@/context/appContext";
+import { GridDataLoading } from "@/components/common/GridDataLoading";
 
 const SearchPage = () => {
   const { searchText } = useContext(AppContext) as AppContextType;
@@ -36,16 +37,7 @@ const SearchPage = () => {
         </Box>
         <Grid container spacing={1}>
           {isLoading ? (
-            new Array(6).fill("").map((_x, i) => (
-              <Grid item key={i}>
-                <Skeleton
-                  variant="rectangular"
-                  animation="wave"
-                  width={225}
-                  height={335}
-                />
-              </Grid>
-            ))
+            <GridDataLoading />
           ) : !searchResults?.results.length ? (
             <Box textAlign="center" mx="auto" mt={10}>
               <Typography color="text.secondary">No Results Found.</Typography>

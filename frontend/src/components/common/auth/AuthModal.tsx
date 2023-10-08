@@ -1,15 +1,5 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Dialog, DialogContent, DialogTitle } from "@mui/material";
+
 import React, { useState } from "react";
 import { Logo } from "../Logo";
 import { appConstants } from "@/constants/appConstants";
@@ -29,6 +19,7 @@ export const AuthModal: React.FC<Props> = ({ open, handleClose }) => {
       <DialogTitle sx={{ textAlign: "center" }}>
         <Logo linkHome={false} />
       </DialogTitle>
+
       <DialogContent sx={{ textAlign: "center" }}>
         <Box p={2}>
           {authAction === appConstants.Auth_State.SignIn ? (

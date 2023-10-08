@@ -11,7 +11,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 
@@ -20,7 +19,6 @@ interface Props {
   setAuthAction: React.Dispatch<React.SetStateAction<string>>;
 }
 export const SignUp: React.FC<Props> = ({ handleClose, setAuthAction }) => {
-  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [startValidationOnType, setStartValidationOnType] =
     useState<boolean>(false);

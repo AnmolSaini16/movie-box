@@ -1,6 +1,6 @@
-import { Box, Button, Skeleton, Typography } from "@mui/material";
+import { Box, Button, Skeleton, Tooltip, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import React from "react";
+import React, { useState } from "react";
 import { SwiperSlide } from "swiper/react";
 
 import {
@@ -13,6 +13,7 @@ import MovieItem from "./MovieItem";
 import { VerticalSwiper } from "../common/VerticalSwiper";
 import { Movie } from "@/interfaces/movieInterface";
 import { uiConfigs } from "@/styleConfig/uiConfig";
+import { ExploreAllMoviesDialog } from "./ExploreAllMoviesDialog";
 
 export const MovieRow = ({
   movieType,
@@ -21,6 +22,8 @@ export const MovieRow = ({
   movieType: MovieType;
   rowTitle: MovieRowTitle;
 }) => {
+  const [showExploreAllModal, setShowExploreAllModal] =
+    useState<boolean>(false);
   const { data, isLoading } = getMovieWithType<Movie>(movieType, 1);
   const movieData = data?.data;
 
@@ -28,10 +31,17 @@ export const MovieRow = ({
     <>
       <Box {...uiConfigs.mainContent} mt={4}>
         <Box mb={1}>
-          <Button color="secondary">
-            <Typography sx={{ mr: 1, fontSize: "18px" }}>{rowTitle}</Typography>{" "}
-            <ArrowForwardIosIcon fontSize="inherit" />
-          </Button>
+          <Tooltip title={`Explore All ${rowTitle}`}>
+            <Button
+              color="secondary"
+              onClick={() => setShowExploreAllModal(true)}
+            >
+              <Typography sx={{ mr: 1, fontSize: "18px" }}>
+                {rowTitle}
+              </Typography>{" "}
+              <ArrowForwardIosIcon fontSize="inherit" />
+            </Button>
+          </Tooltip>
         </Box>
         <VerticalSwiper>
           <>
@@ -59,6 +69,15 @@ export const MovieRow = ({
           </>
         </VerticalSwiper>
       </Box>
+
+      {showExploreAllModal && (
+        <ExploreAllMoviesDialog
+          open={showExploreAllModal}
+          handleClose={() => setShowExploreAllModal(false)}
+          movieType={movieType}
+          rowTitle={rowTitle}
+        />
+      )}
     </>
   );
 };

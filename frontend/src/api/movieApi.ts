@@ -1,8 +1,14 @@
 import { MovieType } from "@/constants/movieContants";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  UseInfiniteQueryResult,
+  UseQueryResult,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 import { authClient, getApiPath, publicCLient } from "./ComponentApi";
 import { appConstants } from "@/constants/appConstants";
 import { AxiosResponse } from "axios";
+import { Movie } from "@/interfaces/movieInterface";
 
 export const getMovieWithType = <T>(
   movieType: MovieType,
@@ -40,5 +46,26 @@ export const getSearchResults = <T>(
         getApiPath(MovieType.GetSearchResults, { query, page: `${page}` })
       ),
     keepPreviousData: true,
+  });
+};
+
+export const getInfiniteMoviesWithType = (
+  movieType: MovieType
+): UseInfiniteQueryResult<Movie, unknown> => {
+  return useInfiniteQuery({
+    queryKey: [`InfiniteQuery-${movieType}`],
+    queryFn: async ({ pageParam = 1 }) => {
+      const res = await publicCLient.get(
+        getApiPath(movieType, { page: `${pageParam}` })
+      );
+      return res.data;
+    },
+    getNextPageParam: (lastPage: Movie) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+      return undefined;
+    },
+    ...appConstants.Cached_Query,
   });
 };
