@@ -25,7 +25,7 @@ model Favorite {
   movieId          Int      @unique
   movieTitle       String
   moviePosterURL   String
-  movieRating      Int
+  movieRating      Float
   movieReleaseData String
   movieGenre       Int[]
   createdAt        DateTime @default(now())

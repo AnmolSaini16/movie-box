@@ -1,7 +1,7 @@
 import { getSearchResults } from "@/api/movieApi";
 import { Movie } from "@/interfaces/movieInterface";
 import { uiConfigs } from "@/styleConfig/uiConfig";
-import { Box, Grid, Skeleton, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import MovieItem from "@/components/movie/MovieItem";
@@ -10,6 +10,9 @@ import { MovieItemType } from "@/constants/movieContants";
 import { debounce } from "lodash";
 import { AppContext, AppContextType } from "@/context/appContext";
 import { GridDataLoading } from "@/components/common/GridDataLoading";
+import { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const SearchPage = () => {
   const { searchText } = useContext(AppContext) as AppContextType;
@@ -56,3 +59,9 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  return { props: { session } };
+};

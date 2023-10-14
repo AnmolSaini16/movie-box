@@ -251,7 +251,7 @@ export const MovieDetail = ({
                   >
                     {/* rate */}
                     {movie?.vote_average > 0 && (
-                      <CircularRateComponent value={movie?.vote_average!} />
+                      <CircularRateComponent value={movie?.vote_average} />
                     )}
 
                     <Divider />
