@@ -1,5 +1,5 @@
 # MovieBox
-## Full stack MERN project. All the information related to movies
+## Full stack MERN project. All the information related to movies. Minimalistic UI.
 #### Frontend:
 * Next Js
 * Next auth
